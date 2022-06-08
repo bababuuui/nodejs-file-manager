@@ -10,7 +10,7 @@ export const cat = async (pathToFile) => {
         }
     }
     catch (e) {
-        console.error(OPERATION_FAILED+ e.message)
+        console.error(OPERATION_FAILED)
     }
 
 
