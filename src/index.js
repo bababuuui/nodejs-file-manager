@@ -5,6 +5,10 @@ import * as readline from "readline";
 import {printListOfFiles} from "./commands/list.js";
 import {INVALID_INPUT} from "./constants/messagesToUser.js";
 import {printCPUArchitecture, printCPUsInfo, printEOL, printHomeDir, printUsername} from "./commands/os.js";
+import {getUpDir} from "./commands/up.js";
+import {goToDir} from "./commands/cd.js";
+import {cat} from "./commands/cat.js";
+import {resolvePath} from "./utils/pathHelper.js";
 
 let currentFolder = os.homedir();
 const username=getEnvVarValueByName("username");
@@ -20,22 +24,24 @@ const rl = readline.createInterface({
 
 rl.on('line', async (input) => {
     console.log(`Input Received: ${input}`);
-    switch (input) {
+    const command =  input.split(" ")[0];
+    const secondArg = input.split(" ")[1];
+    switch (command) {
         case  ".exit":
             console.log(`Thank you for using File Manager, ${username}!`)
             rl.close();
             break;
         case  "up":
-           // await printListOfFiles(currentFolder); todo
+            currentFolder = getUpDir(currentFolder);
             break;
         case  "cd":
-         //   await printListOfFiles(currentFolder); todo
+            currentFolder =  await goToDir(currentFolder,secondArg);
             break;
         case  "ls":
             await printListOfFiles(currentFolder);
             break;
         case  "cat":
-            //   await printListOfFiles(currentFolder); todo
+            await cat(resolvePath(currentFolder,secondArg));
             break;
         case  "add":
             //   await printListOfFiles(currentFolder); todo
@@ -78,10 +84,8 @@ rl.on('line', async (input) => {
             break;
         default:
             console.error(INVALID_INPUT);
-
-
-
     }
+    console.log(`You are currently in ${currentFolder}`);
 });
 
 
