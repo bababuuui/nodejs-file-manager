@@ -11,6 +11,12 @@ import {cat} from "./commands/cat.js";
 import {getResolvedPath} from "./utils/pathHelper.js";
 import {createFile} from "./commands/add.js";
 import CurrentFolder from "./utils/currentFolder.js";
+import {renameFile} from "./commands/rename.js";
+import {copyFile} from "./commands/copyFile.js";
+import {deleteFile} from "./commands/deleteFile.js";
+import {calculateHash} from "./commands/hash.js";
+import {compress} from "./commands/compress.js";
+import {decompress} from "./commands/decompress.js";
 
 const username=getEnvVarValueByName("username");
 
@@ -24,9 +30,9 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', async (input) => {
-    //console.log(`Input Received: ${input}`);
-    const command =  input.split(" ")[0];
-    const secondArg = input.split(" ")[1];
+    // todo handle empty input for commands like 'add '
+    //    todo handle multiple Operation failed
+    const [command , ...args] = input.split(" ");
     switch (command) {
         case  ".exit":
             console.log(`Thank you for using File Manager, ${username}!`)
@@ -36,28 +42,28 @@ rl.on('line', async (input) => {
             CurrentFolder.set(getUpDir());
             break;
         case  "cd":
-            CurrentFolder.set(await goToDir(secondArg));
+            CurrentFolder.set(await goToDir(args[0]));
             break;
         case  "ls":
             await printListOfFiles(CurrentFolder.get());
             break;
         case  "cat":
-            await cat(getResolvedPath(secondArg));
+            await cat(getResolvedPath(args[0]));
             break;
         case  "add":
-            await createFile(secondArg);
+            await createFile(args[0]);
             break;
         case  "rn":
-            //   await printListOfFiles(currentFolder); todo
+             await renameFile( args[0], args[1])
             break;
         case  "cp":
-            //   await printListOfFiles(currentFolder); todo
+           await copyFile(args[0],args[1] )
             break;
         case  "mv":
-            //   await printListOfFiles(currentFolder); todo
+            await copyFile(args[0],args[1] ,true)
             break;
         case  "rm":
-            //   await printListOfFiles(currentFolder); todo
+            await deleteFile(args[0]);
             break;
         case  "os --EOL":
             printEOL();
@@ -75,13 +81,13 @@ rl.on('line', async (input) => {
             printCPUArchitecture();
             break;
         case  "hash":
-            //   await printListOfFiles(currentFolder); todo
+            calculateHash(args[0]);
             break;
         case  "compress":
-            //   await printListOfFiles(currentFolder); todo
+            await compress(args[0],args[1] );
             break;
         case  "decompress":
-            //   await printListOfFiles(currentFolder); todo
+            await decompress(args[0],args[1] );
             break;
         default:
             console.error(INVALID_INPUT);
