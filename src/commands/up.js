@@ -1,4 +1,4 @@
-import * as path  from "path"
+import * as path from "path"
 import CurrentFolder from "../utils/currentFolder.js";
 
 export const getUpDir =  () => {

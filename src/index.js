@@ -1,5 +1,4 @@
-import * as os from "os";
-import { getEnvVarValueByName} from "./args/parseArgs.js";
+import {getEnvVarValueByName} from "./args/parseArgs.js";
 
 import * as readline from "readline";
 import {printListOfFiles} from "./commands/list.js";

@@ -1,4 +1,4 @@
-import * as fs  from 'fs';
+import * as fs from 'fs';
 import {OPERATION_FAILED} from "../constants/messagesToUser.js";
 import * as path from "path";
 import {getResolvedPath} from "../utils/pathHelper.js";
