@@ -7,6 +7,10 @@ import CurrentFolder from "../utils/currentFolder.js";
 export const createFile = async ( fileName) => {
 
     try{
+        if( fileName.length===0) {
+            throw new Error("File name has to be specified");
+        }
+
         const writeStream = fs.createWriteStream(path.join(CurrentFolder.get(),fileName));
         writeStream.write("", "utf8")
     }
