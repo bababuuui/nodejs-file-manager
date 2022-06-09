@@ -1,5 +1,6 @@
 import * as path  from "path"
+import CurrentFolder from "../utils/currentFolder.js";
 
-export const getUpDir =  (currentPath) => {
-        return path.join(currentPath,"..");
+export const getUpDir =  () => {
+        return path.join(CurrentFolder.get(),"..");
 };

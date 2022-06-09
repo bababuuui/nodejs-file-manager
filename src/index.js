@@ -10,12 +10,12 @@ import {goToDir} from "./commands/cd.js";
 import {cat} from "./commands/cat.js";
 import {getResolvedPath} from "./utils/pathHelper.js";
 import {createFile} from "./commands/add.js";
+import CurrentFolder from "./utils/currentFolder.js";
 
-let currentFolder = os.homedir();
 const username=getEnvVarValueByName("username");
 
 console.log(`Welcome to the File Manager, ${username}!`)
-console.log(`You are currently in ${currentFolder}`);
+console.log(`You are currently in ${CurrentFolder.get()}`);
 
 
 const rl = readline.createInterface({
@@ -33,19 +33,19 @@ rl.on('line', async (input) => {
             rl.close();
             break;
         case  "up":
-            currentFolder = getUpDir(currentFolder);
+            CurrentFolder.set(getUpDir());
             break;
         case  "cd":
-            currentFolder =  await goToDir(currentFolder,secondArg);
+            CurrentFolder.set(await goToDir(secondArg));
             break;
         case  "ls":
-            await printListOfFiles(currentFolder);
+            await printListOfFiles(CurrentFolder.get());
             break;
         case  "cat":
-            await cat(getResolvedPath(currentFolder,secondArg));
+            await cat(getResolvedPath(secondArg));
             break;
         case  "add":
-            await createFile(currentFolder,secondArg);
+            await createFile(secondArg);
             break;
         case  "rn":
             //   await printListOfFiles(currentFolder); todo
@@ -86,7 +86,7 @@ rl.on('line', async (input) => {
         default:
             console.error(INVALID_INPUT);
     }
-    console.log(`You are currently in ${currentFolder}`);
+    console.log(`You are currently in ${CurrentFolder.get()}`);
 });
 
 
