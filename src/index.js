@@ -30,8 +30,6 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', async (input) => {
-    // todo handle empty input for commands like 'add '
-    //    todo handle multiple Operation failed
     const [command , ...args] = input.split(" ");
     switch (command) {
         case  ".exit":
