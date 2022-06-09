@@ -8,7 +8,8 @@ import {printCPUArchitecture, printCPUsInfo, printEOL, printHomeDir, printUserna
 import {getUpDir} from "./commands/up.js";
 import {goToDir} from "./commands/cd.js";
 import {cat} from "./commands/cat.js";
-import {resolvePath} from "./utils/pathHelper.js";
+import {getResolvedPath} from "./utils/pathHelper.js";
+import {createFile} from "./commands/add.js";
 
 let currentFolder = os.homedir();
 const username=getEnvVarValueByName("username");
@@ -23,7 +24,7 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', async (input) => {
-    console.log(`Input Received: ${input}`);
+    //console.log(`Input Received: ${input}`);
     const command =  input.split(" ")[0];
     const secondArg = input.split(" ")[1];
     switch (command) {
@@ -41,10 +42,10 @@ rl.on('line', async (input) => {
             await printListOfFiles(currentFolder);
             break;
         case  "cat":
-            await cat(resolvePath(currentFolder,secondArg));
+            await cat(getResolvedPath(currentFolder,secondArg));
             break;
         case  "add":
-            //   await printListOfFiles(currentFolder); todo
+            await createFile(currentFolder,secondArg);
             break;
         case  "rn":
             //   await printListOfFiles(currentFolder); todo
