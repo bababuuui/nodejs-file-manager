@@ -7,14 +7,14 @@ export const goToDir =  async ( desiredPath) => {
     try{
 
         const resolvedPath = getResolvedPath(desiredPath);
-        if( !await isPathValid(resolvedPath) || !await isDir(resolvedPath)){
+        if(  !await isDir(resolvedPath)){
             throw new Error("Dir doesn't exist")
         }
         return resolvedPath;
 
     }
     catch (e) {
-     console.log(OPERATION_FAILED);
+     console.log(OPERATION_FAILED + e.message);
      return CurrentFolder.get();
     }
 
