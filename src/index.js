@@ -62,20 +62,24 @@ rl.on('line', async (input) => {
         case  "rm":
             await deleteFile(args[0]);
             break;
-        case  "os --EOL":
-            printEOL();
-            break;
-        case  "os --cpus":
-            printCPUsInfo();
-            break;
-        case  "os --homedir":
-            printHomeDir();
-            break;
-        case  "os --username":
-            printUsername();
-            break;
-        case  "os --architecture":
-            printCPUArchitecture();
+        case  "os":
+            switch (args[0]) {
+                case "--EOL":
+                    printEOL();
+                    break;
+                case "--cpus":
+                    printCPUsInfo();
+                    break;
+                case "--homedir":
+                    printHomeDir();
+                    break;
+                case "--username":
+                    printUsername();
+                    break;
+                case "--architecture":
+                    printCPUArchitecture();
+                    break;
+            }
             break;
         case  "hash":
             calculateHash(args[0]);
