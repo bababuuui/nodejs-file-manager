@@ -13,9 +13,10 @@ export const decompress = async (pathToFile, pathToDestination) => {
         const source = fs.createReadStream(getResolvedPath(pathToFile));
         const destination = fs.createWriteStream(getResolvedPath(pathToDestination));
         await pipe(source, stream, destination);
+        console.log("File decompressed");
     }
     catch (e) {
-        console.error(OPERATION_FAILED + e.message)
+        console.error(`${OPERATION_FAILED}: ${e.message}`)
     }
 
 

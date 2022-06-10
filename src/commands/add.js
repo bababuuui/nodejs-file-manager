@@ -13,9 +13,10 @@ export const createFile = async ( fileName) => {
 
         const writeStream = fs.createWriteStream(path.join(CurrentFolder.get(),fileName));
         writeStream.write("", "utf8")
+        console.log("File created");
     }
     catch (e) {
-        console.error(OPERATION_FAILED + e.message)
+        console.error(`${OPERATION_FAILED}: ${e.message}`)
     }
 
 

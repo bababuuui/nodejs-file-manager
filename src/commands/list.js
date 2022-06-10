@@ -6,7 +6,7 @@ export const printListOfFiles = async (path) => {
         console.log( await fs.promises.readdir(path));
     }
     catch (e) {
-        console.error(OPERATION_FAILED)
+        console.error(`${OPERATION_FAILED}: ${e.message}`)
     }
 
 };

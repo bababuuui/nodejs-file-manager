@@ -4,10 +4,11 @@ import {getResolvedPath} from "../utils/pathHelper.js";
 
 export const deleteFile = async ( pathToFile) => {
     try{
-            await fs.promises.rm( getResolvedPath(pathToFile));
+        await fs.promises.rm( getResolvedPath(pathToFile));
+        console.log( "File deleted");
     }
     catch (e) {
-        console.error(OPERATION_FAILED + e.message)
+        console.error(`${OPERATION_FAILED}: ${e.message}`)
     }
 
 };

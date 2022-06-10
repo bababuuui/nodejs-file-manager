@@ -14,7 +14,7 @@ export const calculateHash =  (pathToFile) => {
         });
     }
     catch (e) {
-        console.error(OPERATION_FAILED);
+        console.error(`${OPERATION_FAILED}: ${e.message}`)
     }
 
 

@@ -14,7 +14,7 @@ export const goToDir =  async ( desiredPath) => {
 
     }
     catch (e) {
-     console.log(OPERATION_FAILED + e.message);
+     console.error(`${OPERATION_FAILED}: ${e.message}`)
      return CurrentFolder.get();
     }
 

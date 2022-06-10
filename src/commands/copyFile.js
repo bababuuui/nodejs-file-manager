@@ -16,7 +16,7 @@ export const copyFile = async ( pathToFile, pathToNewDir, deleteOldFile) => {
 
     }
     catch (e) {
-        console.error(OPERATION_FAILED + e.message)
+        console.error(`${OPERATION_FAILED}: ${e.message}`)
     }
 
 };
