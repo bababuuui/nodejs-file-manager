@@ -6,7 +6,7 @@ import {getResolvedPath} from "../utils/pathHelper.js";
 export const copyFile = async ( pathToFile, pathToNewDir, deleteOldFile) => {
     try{
         const nameOfFile = path.basename(getResolvedPath(pathToFile));
-        await fs.promises.copyFile( getResolvedPath(pathToFile),  path.join(getResolvedPath(pathToNewDir),nameOfFile));
+        fs.createReadStream(getResolvedPath(pathToFile)).pipe(fs.createWriteStream(path.join(getResolvedPath(pathToNewDir),nameOfFile)));
         console.log( "File copied to  " +path.join(getResolvedPath(pathToNewDir),nameOfFile));
 
         if(deleteOldFile){
