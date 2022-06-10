@@ -2,7 +2,7 @@ import {getEnvVarValueByName} from "./args/parseArgs.js";
 
 import * as readline from "readline";
 import {printListOfFiles} from "./commands/list.js";
-import {INVALID_INPUT} from "./constants/messagesToUser.js";
+import {FAREWELL, INVALID_INPUT, YOU_ARE_CURRENTLY_IN} from "./constants/messagesToUser.js";
 import {printCPUArchitecture, printCPUsInfo, printEOL, printHomeDir, printUsername} from "./commands/os.js";
 import {getUpDir} from "./commands/up.js";
 import {goToDir} from "./commands/cd.js";
@@ -20,7 +20,7 @@ import {decompress} from "./commands/decompress.js";
 const username=getEnvVarValueByName("username");
 
 console.log(`Welcome to the File Manager, ${username}!`)
-console.log(`You are currently in ${CurrentFolder.get()}`);
+console.log(`${YOU_ARE_CURRENTLY_IN} ${CurrentFolder.get()}`);
 
 
 const rl = readline.createInterface({
@@ -32,7 +32,7 @@ rl.on('line', async (input) => {
     const [command , ...args] = input.split(" ");
     switch (command) {
         case  ".exit":
-            console.log(`Thank you for using File Manager, ${username}!`)
+            console.log(`${FAREWELL}, ${username}!`)
             rl.close();
             break;
         case  "up":
@@ -93,11 +93,11 @@ rl.on('line', async (input) => {
         default:
             console.error(INVALID_INPUT);
     }
-    console.log(`You are currently in ${CurrentFolder.get()}`);
+    console.log(`${YOU_ARE_CURRENTLY_IN} ${CurrentFolder.get()}`);
 });
 
 
 rl.on('SIGINT', () => {
-    console.log(`Thank you for using File Manager, ${username}!`)
+    console.log(`${FAREWELL}, ${username}!`)
     rl.close();
 });
