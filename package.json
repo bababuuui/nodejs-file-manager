@@ -1,0 +1,22 @@
+{
+  "name": "nodejs-file-manager",
+  "version": "1.0.0",
+  "description": "asd",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "debug": "node src/index.js -- --username=Ilyas"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bababuuui/nodejs-file-manager.git"
+  },
+  "author": "Ilya Bubnevich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bababuuui/nodejs-file-manager/issues"
+  },
+  "homepage": "https://github.com/bababuuui/nodejs-file-manager#readme"
+}
